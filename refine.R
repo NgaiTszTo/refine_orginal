@@ -1,13 +1,24 @@
-refine
+#define refine_original as refine
+refine <- tbl_df(refine_original)
+#changing the company's column to lowercase
+refine$company <- tolower(refine$company)
+#standardize all the misspellings/ clean up brand names
+philips <- agrep(pattern = "philips",refine$company, max.distance = 3,ignore.case =FALSE, value =FALSE)
+akzo <- agrep(pattern = "akzo",refine$company, max.distance = 2,ignore.case =FALSE, value =FALSE)
+van_houten <- agrep(pattern = "van_houten",refine$company, max.distance = 2,ignore.case =FALSE, value =FALSE)
+unilever<- agrep(pattern = "unilever",refine$company, max.distance = 2,ignore.case =FALSE, value =FALSE)
+
+refine$company[philips] <- "philips"
+refine$company[akzo] <- "akzo"
+refine$company[van_houten] <- "van houten"
+refine$company[unilever] <- "unilever
+
+
 refine <- separate(refine,`Product code / number`,into = c("Product code", "Product number"),remove = TRUE)
-View(refine)
-?merge
 product_category <- refine$`Product code`
 product_category <- cbind("Product code",product_category)
-product_category
-?gsub
-View(refine)
-refine$`Product code`
+
+
 product_category <- gsub(pattern = "p",replacement = "Smartphone",x = product_category)
 product_category <- gsub(pattern = "x",replacement = "Laptop",x = product_category)
 product_category <- gsub(pattern = "v",replacement = "TV",x = product_category)
@@ -128,63 +139,7 @@ product_category
 gsub(pattern = "p",replacement="Smartphone",x = product_category)
 gsub(pattern ="p",replacement="Smartphone",x = product_category)
 product_category
-rm(product_category)
-product_category <- refine$`Product code`
-product_category <- cbind(refine$`Product code`,product_category)
-product_category <- gsub(pattern = "p",replacement = "Smartphone",x = product_category)
-product_category <- gsub(pattern = "x",replacement = "Laptop",x = product_category)
-product_category <- gsub(pattern = "v",replacement = "TV",x = product_category)
-product_category <- gsub(pattern = "q",replacement = "Tablet",x = product_category)
-product_category
-View(refine)
-refine %.% select(product_category) %>% mutate()
-refine %>% select(product_category) %>% mutate()
-View(refine)
-refine %>% select(product_category) %>% mutate()
-View(refine)
-product_category
-refine %>% select(product_category) %>% mutate()
-refine %>% select(product_category[2]) %>% mutate()
-refine %>% select(product_category) %>% mutate(product_category = NULL)
-View(refine)
-View(refine)
-product_category
-rm(product_category)
-refine$product_category <- refine$`Product code`
-View(refine)
-product_category <- gsub(pattern = "p",replacement = "Smartphone",x = product_category)
-View(refine)
-product_category <- cbind(refine$`Product code`,refine$product_category)
-product_category
-product_category <- gsub(pattern = "p",replacement = "Smartphone",x = product_category)
-product_category <- gsub(pattern = "x",replacement = "Laptop",x = product_category)
-product_category <- gsub(pattern = "v",replacement = "TV",x = product_category)
-product_category <- gsub(pattern = "q",replacement = "Tablet",x = product_category)
-View(refine)
-View(refine)
-product_category
-refine$product_category
-product_category[2]
-product_category[,2]
-refine$product_category <- product_category[,2]
-View(refine)
-library(tidyr)
-library(dplyr)
-colnames(refine)
-refine <- refine[,c(1,2,8,3,4,5,6,7)]
-refine$full_address <- refine$address + refine$city +refine$country
-refine <- mutate(refine$full_address)
-?combine
-?bind_cols
-full_address <- bind_cols('address','city','country')
-full_address <- bind_cols(refine$address,refine$city)
-full_address <- unite(refine,refine$address:refine$country)
-full_address <- unite(refine,refine$address:refine$country,sep = "-")
-unite(refine,full_address,refine$address:refine$country,sep = "-")
-unite(refine,full_address,'address':'country',sep = "-")
-unite(refine,full_address,'address':'country',sep = "-",remove = FALSE)
-unite(refine,full_address,'address':'country',sep = "-",remove = FALSE)
-unite(refine,full_address,'address':'country',sep = "-",remove = TRUE)
+
 refine <- unite(refine,full_address,'address':'country',sep = "-",remove = TRUE)
 refine <- unite(refine,full_address,'address':'country',sep = ",",remove = TRUE)
 refine <- unite(refine,'full_address',sep = ",",remove = TRUE)
