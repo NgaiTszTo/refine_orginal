@@ -45,6 +45,7 @@ refine$company_van_houten <- if_else(refine$company == "van houten", 1, 0)
 refine$company_unilever <- if_else(refine$company == "unilever", 1, 0)
 #product category
 
-refine$company_philips <- if_else(refine$company == "philips", 1,0)
-refine$company_philips <- if_else(refine$company == "philips", 1,0)
-refine$company_philips <- if_else(refine$company == "philips", 1,0)
+refine$product_smartphone <- if_else(refine$product_category == "Smartphone", 1,0)
+refine$product_tv <- if_else(refine$product_category == "TV", 1,0)
+refine$product_laptop <- if_else(refine$product_category == "Laptop", 1,0)
+refine$product_tablet <- if_else(refine$product_category == "Tablet", 1,0)
