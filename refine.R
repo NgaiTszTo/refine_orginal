@@ -33,3 +33,5 @@ refine <- refine[,c(1,2,8,3,4,5,6,7)]
 
 # 4 Add full address for geocoding
 refine <- unite(refine,full_address,'address':'country',sep = ",",remove = TRUE)
+
+#5  Create dummy variables for company and product category
